@@ -1,0 +1,87 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Task Manager</title>  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            margin: 20px;  
+        }  
+        #taskInput {  
+            padding: 10px;  
+            width: 200px;  
+            margin-right: 10px;  
+        }  
+        #addTaskButton {  
+            padding: 10px;  
+            background-color: #28a745; /* Green */  
+            color: white;  
+            border: none;  
+            cursor: pointer;  
+        }  
+        #addTaskButton:hover {  
+            background-color: #218838; /* Darker Green */  
+        }  
+        .task {   
+            display: flex;   
+            justify-content: space-between;   
+            margin: 5px 0;   
+        }  
+        .deleteButton {  
+            padding: 5px 10px;  
+            background-color: #dc3545; /* Red */  
+            color: white;  
+            border: none;  
+            cursor: pointer;  
+        }  
+        .deleteButton:hover {  
+            background-color: #c82333; /* Darker Red */  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div>  
+        <h1>Task Manager</h1>  
+        <input type="text" id="taskInput" placeholder="Enter a task..." />  
+        <button id="addTaskButton">Add Task</button>  
+        <div id="taskList"></div>  
+    </div>  
+
+    <script src="script.js"></script>  
+</body>
+<script>
+    document.getElementById("addTaskButton").addEventListener("click", addTask);  
+
+function addTask() {  
+    const taskInput = document.getElementById("taskInput");  
+    const taskValue = taskInput.value.trim();  
+    
+    if (taskValue) {  
+        const taskList = document.getElementById("taskList");  
+        
+        // Create task item  
+        const taskItem = document.createElement("div");  
+        taskItem.className = "task";  
+        
+        const taskText = document.createElement("span");  
+        taskText.textContent = taskValue;  
+        
+        const deleteButton = document.createElement("button");  
+        deleteButton.textContent = "Delete";  
+        deleteButton.className = "deleteButton";  
+        deleteButton.addEventListener("click", () => taskList.removeChild(taskItem));  
+        
+        taskItem.appendChild(taskText);  
+        taskItem.appendChild(deleteButton);  
+        taskList.appendChild(taskItem);  
+        
+        // Clear input field  
+        taskInput.value = "";  
+    } else {  
+        alert("Please enter a task.");  
+    }  
+}  
+</script>  
+</html>  
